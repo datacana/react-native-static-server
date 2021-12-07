@@ -1,15 +1,30 @@
-﻿using Microsoft.ReactNative.Managed;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+
+using Microsoft.ReactNative;
+using Microsoft.ReactNative.Managed;
+
 using Restup.Webserver;
 using Restup.Webserver.File;
 using Restup.Webserver.Http;
 using Restup.WebServer.Logging;
-using System;
 
 namespace FPStaticServer
 {
-	[ReactModule("FPStaticServer")]
-	internal class FPStaticServerModule
-	{
+    [ReactModule("FPStaticServer")]
+    class FPStaticServer
+    {
+        [ReactConstant]
+        public double E = Math.E;
+
+        [ReactConstant("Pi")]
+        public double PI = Math.PI;
+
+
 		public string ServerUrl { get; private set; }
 		public string ServerRootPath { get; private set; }
 		public int ServerPort { get; private set; }
@@ -20,35 +35,40 @@ namespace FPStaticServer
 		private HttpServer server;
 
 		[ReactMethod("start")]
-		public async void Start(int port, string root, bool localOnly, bool keepAlive, IReactPromise<string> promise)
+		public async void start(int port, string root, bool localOnly, bool keepAlive, IReactPromise<string> promise)
 		{
-			ServerPort = port;
-			ServerRootPath = root.Replace('/', '\\');
-			LocalHostOnly = localOnly;
-			KeepAlive = keepAlive;
-			ServerUrl = "http://localhost";
-			ServerIsRunning = false;
 
-			var configuration = new HttpServerConfiguration()
-			  .ListenOnPort(port)
-			  .RegisterRoute(new StaticFileRouteHandler(ServerRootPath))
-			  .EnableCors();
+			Debug.WriteLine(port);
+			Debug.WriteLine(root);
+			Debug.WriteLine(localOnly);
 
-			LogManager.SetLogFactory(new DebugLogFactory());
-			server = new HttpServer(configuration);
+            ServerPort = port;
+            ServerRootPath = root.Replace('/', '\\');
+            LocalHostOnly = localOnly;
+            KeepAlive = keepAlive;
+            ServerUrl = "http://localhost";
+            ServerIsRunning = false;
 
-			try
-			{
-				await server.StartServerAsync();
-				ServerIsRunning = true;
-				promise.Resolve(ServerUrl + ":" + ServerPort);
-			}
-			catch (Exception ex)
-			{
-				Stop();
-				promise.Reject(new ReactError { Message = "COULDNT START SERVER : " + ex.Message });
-			}
-		}
+            var configuration = new HttpServerConfiguration()
+              .ListenOnPort(port)
+              .RegisterRoute(new StaticFileRouteHandler(ServerRootPath))
+              .EnableCors();
+
+            LogManager.SetLogFactory(new DebugLogFactory());
+            server = new HttpServer(configuration);
+
+            try
+            {
+                await server.StartServerAsync();
+                ServerIsRunning = true;
+                promise.Resolve(ServerUrl + ":" + ServerPort);
+            }
+            catch (Exception ex)
+            {
+                Stop();
+                promise.Reject(new ReactError { Message = "COULDNT START SERVER : " + ex.Message });
+            }
+        }
 
 		[ReactMethod("stop")]
 		public void Stop()
@@ -125,4 +145,5 @@ namespace FPStaticServer
 			}
 		}
 	}
+
 }
