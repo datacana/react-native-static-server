@@ -17,22 +17,14 @@
   "keywords": [
     "react-native"
   ],
-  "author": {
-    "name": "Fred Chasen",
-    "email": "fchasen@gmail.com"
-  },
+  "author": "Fred Chasen <fchasen@gmail.com>",
   "license": "MIT",
   "licenseFilename": "LICENSE",
-  "readmeFilename": "README.md",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
-  "files": [
-    "android",
-    "ios",
-    "index.js",
-    "index.d.ts",
-    "react-native-static-server.podspec"
-  ]
+  "bugs": {
+    "url": "https://github.com/futurepress/react-native-static-server/issues"
+  }
 }

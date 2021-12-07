@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.summary        = package['description']
   s.description    = package['description']
   s.license        = package['license']
-  s.author         = package['author']['name']
+  s.authors        = package['author']
   s.homepage       = package['homepage']
   s.source         = { :git => 'https://github.com/futurepress/react-native-static-server.git' }
 
