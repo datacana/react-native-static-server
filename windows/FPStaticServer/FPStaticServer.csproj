@@ -8,7 +8,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{6906BB23-0FFB-47EF-869B-221A44A54183}</ProjectGuid>
+    <ProjectGuid>{7264B7AC-4BFB-4058-8659-48ABA90DE70A}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FPStaticServer</RootNamespace>
@@ -19,7 +19,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <LangVersion>7.3</LangVersion>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
@@ -97,8 +97,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FPStaticServerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FPStaticServerVZ.cs" />
     <Compile Include="ReactPackageProvider.cs" />
   </ItemGroup>
   <ItemGroup>
